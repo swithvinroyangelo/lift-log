@@ -1,0 +1,13 @@
+@import "./tokens.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { -webkit-text-size-adjust: 100%; }
+body { overscroll-behavior-y: none; }
+
+/* Numbers in tables line up. */
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Inputs: 16px on phones so iOS Safari does not zoom the page when one is focused. */
+input, textarea, select { font-size: 16px; }

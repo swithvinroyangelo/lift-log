@@ -1,0 +1,74 @@
+feature,area,priority,original,clone,notes
+Sign up and log in with email,onboarding,must,yes,no,inferred: needed for sync across devices | BUILD: single device and no accounts yet; arrives with the Supabase step
+Create routines with no cap (the goal of this project),routines,must,yes,yes,original caps free plan at 4 [src 4] | BUILD: tested with 6 routines; no limit in code
+Routine folders,routines,must,yes,yes,[src 2] | BUILD: create-rename-delete and move routine in or out; deleting keeps routines
+Edit and delete routines,routines,must,yes,yes,inferred
+Start a live workout from a routine,workout,must,yes,yes,[src 2]
+Start an empty workout,workout,must,yes,yes,[src 2]
+Log sets: weight and reps and mark complete,workout,must,yes,yes,[src 1][src 2]
+Set types: normal and warm-up and drop and failure,workout,must,yes,yes,[src 1][src 2] | BUILD: tap the set number to change type
+Show previous performance for each exercise,workout,must,yes,yes,[src 1][src 2] | BUILD: matches by set position
+Automatic rest timer,workout,must,yes,yes,[src 1][src 2] | BUILD: survives reload; computed from an end time
+Save workout to history,history,must,yes,yes,[src 2]
+Workout history list with no 3-month cap,history,must,yes,yes,original caps free history at 3 months [src 4] | BUILD: no limit in code
+Edit a past workout,history,must,yes,yes,[src 2] | BUILD: title-notes-sets-add-remove exercise; records and volume recompute
+Delete a past workout,history,must,yes,yes,[src 2]
+Save a workout as a routine,routines,must,yes,yes,[src 2]
+Exercise library to search and pick from,exercises,must,yes,yes,[src 2] content must be written fresh | BUILD: 62 exercises written fresh; names only
+Custom exercises with no cap,exercises,must,yes,yes,original caps free plan at 7 [src 4] | BUILD: duplicate names refused
+RPE logging per set,workout,should,yes,no,"[src 1][src 2] | BUILD: stored in the data, no input yet"
+Supersets,workout,should,yes,partial,[src 1][src 2] | BUILD: link and unlink work; no shared rest timer or grouped look yet
+Exercise notes,exercises,should,yes,yes,[src 2]
+Copy a past workout into a new session,history,should,yes,yes,[src 2] | BUILD: 'Do this workout again'
+Calendar view of workout days,history,should,yes,no,[src 2] | BUILD: not built
+Per-exercise strength graph,progress,should,yes,no,[src 1][src 2] | BUILD: not built
+Personal record tracking,progress,should,yes,partial,[src 1] | BUILD: Records count per workout (heaviest set); no PR list or live alert
+Sets per muscle group per week,progress,should,yes,no,[src 2] | BUILD: not built
+Body weight and measurements log,progress,should,yes,no,[src 1][src 2] | BUILD: not built
+Kg and lb units,settings,should,yes,yes,inferred | BUILD: snaps lb to nearest 0.5
+Offline workouts that sync later,platform,should,yes,partial,[src 1] hard part: sync conflicts | BUILD: works with no connection because data is local; nothing to sync yet
+Streak tracking,progress,could,yes,no,[src 1]
+Live PR notification during a workout,workout,could,yes,no,[src 2]
+Warm-up set calculator,tools,could,yes,no,[src 2]
+Weight plate calculator,tools,could,yes,no,[src 2]
+Muscle distribution chart,progress,could,yes,no,[src 2]
+Monthly report,progress,could,yes,no,[src 2]
+Year in review,progress,could,yes,no,[src 2]
+Progress photos,progress,could,yes,no,[src 1][src 2] needs file storage
+Share routines and folders by link,sharing,could,yes,no,[src 2]
+Shareable workout summary image,sharing,could,yes,no,[src 2]
+Export a workout as text for ChatGPT or Claude,integrations,could,yes,no,[src 1] version 3.2.0
+Generated training program (Hevy Trainer equivalent),coaching,could,yes,no,[src 1][src 2] needs an AI API and costs money per use
+Strava sync,integrations,could,yes,no,[src 1][src 2] needs Strava API keys
+Interface in other languages,settings,could,yes,no,[src 1] original has 16
+Follow other users,social,skip,yes,skip,the network and its users cannot be cloned
+Social feed with likes and comments,social,skip,yes,skip,the network and its users cannot be cloned
+Discovery feed and gym leaderboards,social,skip,yes,skip,the network and its users cannot be cloned
+Invite friends from contacts,social,skip,yes,skip,needs a user base and native contacts access
+Private profile setting,social,skip,yes,skip,pointless without a social feed
+Library of programs and workouts with exercise videos,content,skip,yes,skip,licensed content owned by the original
+Apple Watch and WearOS apps,platform,skip,yes,skip,native hardware apps
+Heart rate and calorie data from watch,platform,skip,yes,skip,needs watch hardware
+HealthKit export,platform,skip,yes,skip,iOS native only
+Live Activity and home screen widgets,platform,skip,yes,skip,iOS native only
+Native iOS and Android apps,platform,skip,yes,skip,needs paid developer accounts; web app instead
+Hevy Coach trainer platform,coaching,skip,yes,skip,separate B2B product
+Pro subscription and payments,billing,skip,yes,skip,personal use so everything is unlocked
+Profile chart of weekly duration or volume or reps with a date range,progress,should,yes,no,"observed in profile screenshot; chart toggles Duration/Volume/Reps, range 'Last 3 months'"
+Week streak and rest day count on the calendar,progress,should,yes,no,observed in calendar screenshot
+Calendar day shows the routine name under the date,history,should,yes,no,observed in calendar screenshot
+Workout card shows time and volume and record count,history,must,yes,yes,observed in home and profile screenshots
+Statistics screen reached from the profile dashboard,progress,should,yes,no,observed tile; contents not seen
+Search and notifications in the home header,onboarding,skip,yes,skip,notifications only exist for the social network; search not needed with one user's data
+Complete a set with one tap: row turns green and the rest timer starts,workout,must,yes,yes,observed live workout screenshots
+Rest timer panel with minus 15 and plus 15 and skip,workout,must,yes,yes,observed; countdown must survive phone lock
+Rest duration set per exercise,workout,should,yes,yes,observed 'Rest Timer: 2min 0s' under each exercise
+Live duration and volume and set count while training,workout,must,yes,yes,observed stats strip
+Routine note shown at the top of a live workout,workout,should,yes,yes,observed
+Remove an exercise from a live workout,workout,must,yes,yes,observed exercise menu
+Replace an exercise during a workout,workout,should,yes,yes,observed exercise menu
+Reorder exercises during a workout,workout,should,yes,yes,"observed exercise menu | BUILD: move up and down, no drag"
+Filter exercise picker by equipment and by muscle,exercises,must,yes,yes,observed picker
+Recent and suggested exercises in the picker,exercises,could,yes,partial,observed picker; suggested seems based on the same muscle | BUILD: Recent only
+Muscle diagram highlighting muscles worked,progress,could,yes,no,original illustration is licensed so ours would be a new simple icon
+Collapse a running workout and come back to it,workout,should,yes,yes,chevron seen; behaviour not seen; also covers the phone-lock draft | BUILD: minimise button plus a resume banner

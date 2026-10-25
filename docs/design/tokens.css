@@ -1,0 +1,90 @@
+/* Generated from tokens.json. Components use these variables (or the Tailwind names), never raw hex. */
+:root {
+  color-scheme: dark;
+
+  --color-bg: #000000;
+  --color-surface: #1c1c1e;
+  --color-surface-raised: #2c2c2e;
+  --color-border: #2c2c2e;
+  --color-border-input: #6b7280;
+  --color-text: #ffffff;
+  --color-text-muted: #8e949b;
+  --color-accent: #a78bfa;
+  --color-on-accent: #120a24;
+  --color-danger: #ff6b5e;
+  --color-success: #4ade80;
+  --color-warning: #f7d000;
+  --color-record: #f7d000;
+  --color-streak: #ff7a3d;
+  --color-on-success: #04120c;
+  --color-success-surface: #1f4d2e;
+  --color-warmup: #f5a524;
+  --color-scrim: #000000;
+  --color-sheet: #161618;
+
+  /* Decorative exercise-thumbnail tints. The muscle name is always written beside them. */
+  --muscle-chest: #e07a8a;
+  --muscle-back: #6aa7e0;
+  --muscle-shoulders: #e0b36a;
+  --muscle-biceps: #8ad07a;
+  --muscle-triceps: #c58ae0;
+  --muscle-forearms: #8ad0c8;
+  --muscle-abs: #e0d06a;
+  --muscle-quads: #e09a6a;
+  --muscle-hamstrings: #d06a6a;
+  --muscle-glutes: #e06aa8;
+  --muscle-calves: #6ad0a0;
+  --muscle-full-body: #a0a0e0;
+  --muscle-cardio: #6ac8e0;
+  --muscle-other: #a0a6ad;
+
+  --font-sans: system-ui, -apple-system, 'SF Pro Text', Inter, Roboto, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-2xs: 10px; --leading-2xs: 12px; --weight-2xs: 500;
+  --text-xs: 12px;  --leading-xs: 16px;  --weight-xs: 400;
+  --text-sm: 14px;  --leading-sm: 20px;  --weight-sm: 400;
+  --text-base: 16px; --leading-base: 22px; --weight-base: 600;
+  --text-lg: 20px;  --leading-lg: 26px;  --weight-lg: 700;
+  --text-xl: 24px;  --leading-xl: 30px;  --weight-xl: 700;
+
+  --space-0: 0; --space-1: 4px; --space-2: 8px; --space-3: 12px;
+  --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px;
+
+  --screen-margin: 16px;
+  --card-padding: 16px;
+  --card-gap: 16px;
+  --control-height: 48px;
+  --button-height: 40px;
+  --tab-bar-height: 49px;
+  --set-row-height: 48px;
+  --rest-panel-height: 96px;
+  --sheet-radius: 24px;
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-sm);
+}
+
+/* Visible keyboard focus everywhere. accent on bg is 8:1 or better. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
