@@ -11,7 +11,7 @@ const TABS = [
 ] as const;
 
 // Hidden during a live workout so a stray tap cannot leave it (a design decision, not copied from the original).
-const HIDE_ON = ["/live", "/routine"];
+const HIDE_ON = ["/live", "/routine", "/login"];
 
 export function TabBar() {
   const path = usePathname();

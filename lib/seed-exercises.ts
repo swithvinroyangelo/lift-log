@@ -65,12 +65,88 @@ const rows: [string, Muscle, Equipment][] = [
   ["Rowing Machine", "cardio", "machine"],
 ];
 
+// Fixed UUIDs (uuid v5 of the slug), so the same exercise has the same id in the app and in the database.
+const BUILTIN_IDS: Record<string, string> = {
+  "bench-press-barbell": "e952ede4-5fce-539a-b601-d743feac3b9b",
+  "bench-press-dumbbell": "99e0cf8c-1591-5a31-a7ea-27cab54af833",
+  "incline-bench-press-barbell": "f03854cf-fe09-5766-9075-34c360719def",
+  "incline-bench-press-dumbbell": "f8d3fd4d-9333-564e-8fbf-8c528953329c",
+  "incline-chest-press-machine": "d6abe886-b1f8-5001-ad92-0353d88afec8",
+  "chest-press-machine": "05ca0faa-55cd-5186-8d40-4e0459fb0d39",
+  "chest-fly-machine": "7fdabc16-a27f-52f4-9c45-6e1a13984bad",
+  "cable-crossover": "b4fe3c87-ac46-55f0-ae2a-2984b17cec74",
+  "push-up": "1aef3ff7-e3a4-5f23-bcf3-971c8c1c33e5",
+  "dip": "55e529c7-afac-5d5a-95ab-983cb9d51c45",
+  "pull-up": "91090a4b-7685-5a10-85a0-8d65633999cc",
+  "pull-up-assisted": "69bdcc27-b37d-5c34-bae4-761130fb82b0",
+  "chin-up": "86233f8d-00f5-5f97-b55f-a5761e5d7f93",
+  "lat-pulldown-cable": "426702ec-06cc-5e53-94e5-5ebcf64ce9f8",
+  "seated-cable-row": "0116a7f2-a1d8-5dc7-962a-a54978cb84b8",
+  "single-arm-cable-row": "12ae2ad2-8295-5df4-bb47-e5b0191455c1",
+  "bent-over-row-barbell": "89d5509c-9e86-5eb5-bf24-d1150aca0934",
+  "one-arm-row-dumbbell": "7413e5ae-042a-5da8-9fa0-cc823f56e24a",
+  "t-bar-row": "663cdf9b-8e72-5300-b86f-4588ec30e1ba",
+  "deadlift-barbell": "8b624160-707b-5573-92ab-c6d65c3584b4",
+  "overhead-press-barbell": "0602aa40-5d16-50f7-ba7f-d7da978b4037",
+  "shoulder-press-dumbbell": "be8b2277-66f9-559d-8588-dadae1c2349c",
+  "shoulder-press-machine": "4cbd44aa-ad4d-510d-9472-0ab4d2b410a4",
+  "lateral-raise-dumbbell": "ea4fce1d-c141-56f5-9de2-85e474f5e1e8",
+  "lateral-raise-cable": "2ad639f7-398d-50ef-a4a8-66b4250e2c96",
+  "rear-delt-fly-machine": "7e85ba2d-2df6-543e-afa1-100acc07fcf9",
+  "face-pull-cable": "185d38b5-6602-5ccc-97d9-95f5b2cfd720",
+  "shrug-dumbbell": "a3433c23-d281-523c-9cbc-1b40cfa69535",
+  "biceps-curl-barbell": "8c8e58d8-e15c-5670-b256-d6c11c663506",
+  "biceps-curl-dumbbell": "d74c9bf8-70d9-5862-9e37-0e8d0804c330",
+  "biceps-curl-cable": "b93726a8-ce06-508f-848d-5ff5b1eb0b91",
+  "hammer-curl-dumbbell": "1e87bfa0-93f7-50e0-972c-f55c02075b59",
+  "preacher-curl-machine": "b7534e78-e4ba-55a5-8fda-8e7122894083",
+  "triceps-pushdown-cable": "9a6084b3-1c79-5ebd-8eef-847060a37f6a",
+  "overhead-triceps-extension-cable": "c9e95a0c-6cda-5d28-8b46-31e51ab3a917",
+  "skull-crusher-barbell": "fb56eb3c-86e9-521c-bfc9-56753a465248",
+  "close-grip-bench-press-barbell": "3346f0a1-1f24-5fd9-aba4-5b064af0f5a9",
+  "wrist-curl-dumbbell": "a4f93ac2-ac2e-52e3-a445-cf38dd7f65a1",
+  "crunch": "53f9d494-f34f-5929-8cb4-c64daeae7c50",
+  "plank": "83013948-0033-5171-83a8-e6d947321d04",
+  "hanging-leg-raise": "a348e7de-ad74-58ec-995a-d24f65cd7d89",
+  "cable-crunch": "3fb78460-d748-59e0-afdf-773962345680",
+  "squat-barbell": "daf25500-beb0-53db-8e48-d86713fba88e",
+  "squat-smith-machine": "ab84da76-c4f7-5768-a530-61f174defa10",
+  "leg-press-machine": "f45db8d8-c77b-5363-90fd-e2b6e644a747",
+  "leg-extension-machine": "f015ae16-c8d4-588e-8128-604214b17ca8",
+  "bulgarian-split-squat-dumbbell": "3b652eb2-3ea1-5251-ab6e-5403c0f7d6a8",
+  "lunge-dumbbell": "de259e16-b85a-5754-a4c3-9ee8b123a09c",
+  "romanian-deadlift-barbell": "b2e75c58-88e8-5194-bb7a-17815b39cf4b",
+  "romanian-deadlift-dumbbell": "e97fdf77-2932-5bd9-93e3-dc2bbb92b01a",
+  "lying-leg-curl-machine": "8a13f0ac-ebc7-5ce4-ab39-6209d700474e",
+  "seated-leg-curl-machine": "598b4e59-e06a-5a02-a7f4-cc99814d670a",
+  "hip-thrust-barbell": "8708608e-ef67-5098-8ba0-8d4aac53b782",
+  "glute-kickback-cable": "6c7a3ca9-6153-5fe9-8769-379866e07c6b",
+  "standing-calf-raise-machine": "9ab9caf4-4f41-56fe-9ac6-394a9cae7ad8",
+  "seated-calf-raise-machine": "fe518a11-5647-5c71-a37a-a0f56b8ffd94",
+  "kettlebell-swing": "5455f02a-fd20-5790-befc-6ab6b4f91157",
+  "treadmill-run": "a467199b-bd35-5b94-adf1-c99b6670d439",
+  "cycling": "c3d9a097-37d3-5e1c-8235-d167c91feec7",
+  "rowing-machine": "1dbcba1c-742d-5846-b6b9-30778328a030",
+};
+
+/** Old local-only ids looked like "builtin-bench-press-dumbbell". Maps them to the fixed UUIDs. */
+export const LEGACY_BUILTIN_IDS: Record<string, string> = Object.fromEntries(
+  Object.entries(BUILTIN_IDS).map(([s, id]) => [`builtin-${s}`, id]),
+);
+
+/** Rewrites any legacy built-in ids inside a saved object (routines, workouts, backups, drafts). */
+export function upgradeLegacyIds<T>(value: T): T {
+  const text = JSON.stringify(value);
+  if (!text.includes("builtin-")) return value;
+  return JSON.parse(text.replace(/"builtin-[a-z0-9-]+"/g, (m) => `"${LEGACY_BUILTIN_IDS[m.slice(1, -1)] ?? m.slice(1, -1)}"`)) as T;
+}
+
 function slug(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 export const SEED_EXERCISES: Exercise[] = rows.map(([name, muscle, equipment]) => ({
-  id: `builtin-${slug(name)}`,
+  id: BUILTIN_IDS[slug(name)] as string,
   name,
   muscle,
   equipment,

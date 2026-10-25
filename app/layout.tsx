@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { AuthGate } from "@/components/auth-gate";
 import { TabBar } from "@/components/tab-bar";
 import "./globals.css";
 
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="min-h-dvh bg-bg font-sans text-sm text-text antialiased">
         <div className="mx-auto min-h-dvh w-full max-w-[480px] pb-[calc(var(--tab-bar-height)+env(safe-area-inset-bottom)+16px)]">
-          {children}
+          <AuthGate>{children}</AuthGate>
         </div>
         <TabBar />
       </body>

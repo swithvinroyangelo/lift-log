@@ -184,7 +184,12 @@ export default function LiveWorkout() {
     const done = finalizeWorkout(workout);
     if (!done) { setConfirm("empty"); return; }
     finished.current = true;
-    await saveWorkout(done);
+    try {
+      await saveWorkout(done); // same id on a retry, so saving twice never duplicates
+    } catch (e) {
+      finished.current = false; // keep the draft alive: nothing is lost, the person can tap Finish again
+      throw e;
+    }
     await clearDraft();
     router.replace(`/history/${done.id}?done=1`);
   }

@@ -22,7 +22,7 @@ Stack as planned: Next.js + TypeScript + Tailwind, design tokens from `design/`.
 - The tab bar is hidden during a live workout.
 - The exercise name on the live screen is not tappable yet (the original's opens a stats page, which does not exist here).
 - Bodyweight movements logged with 0 kg add nothing to volume.
-- 62 built-in exercises, written fresh (names only). The original's illustrations and videos are not used.
+- 60 built-in exercises, written fresh (names only). The original's illustrations and videos are not used.
 
 ## Checks run
 
@@ -39,3 +39,12 @@ Stack as planned: Next.js + TypeScript + Tailwind, design tokens from `design/`.
 - Installing to the home screen, and whether the install keeps the data. The manifest and icons exist; nothing has proved it on a real phone.
 - Real offline use (airplane mode) and long-lock behaviour of the rest timer on a real phone.
 - Screen reader testing by a person. Labels and roles are in place; no one has listened to it.
+
+## Supabase step (added)
+
+- Data layer split: `store-local.ts` (browser) and `store-remote.ts` (Supabase) behind the same async interface; the compiler checks they match.
+- Saves of a routine or workout go through one database function each (all-or-nothing). 16 SQL checks pass on plain Postgres: replace-not-pile-up, idempotent workout save, deleted routine/folder keeps data, stale routine link, bad data leaves nothing half-saved, other users see nothing and cannot overwrite, signed-out cannot call.
+- Built-in exercises now have fixed UUIDs shared by the app and `003_seed_exercises.sql` (60 of them; earlier notes said 62, that was wrong). Old local ids are upgraded automatically.
+- Login screen, signed-out redirect, sign-out, one banner for any failed save/load.
+- Unfinished-workout draft stays on the phone; Finish needs a connection and can be retried safely.
+- NOT verified: the app against a live Supabase project (workspace network blocks it), real email sign-up flow, Vercel deploy, real iPhone.
